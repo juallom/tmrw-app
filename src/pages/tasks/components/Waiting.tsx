@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Spacer, Box, Text } from "@chakra-ui/react";
 import { Task } from "../types";
-import { useAuth } from "../../../providers/auth/useAuth";
+import { useAuth } from "../../../providers/auth/hooks/useAuth";
 
 export type WaitingProps = {
   tasks: Task[];

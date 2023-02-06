@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { UseMutationResult } from "react-query";
 import { AxiosResponse } from "axios";
-import { useAuth } from "../../../providers/auth/useAuth";
+import { useAuth } from "../../../providers/auth/hooks/useAuth";
 
 export type NotificationsProps = {
   tasks: Task[];

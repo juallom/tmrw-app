@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Flex, Link, Spacer, Box, Button, Container } from "@chakra-ui/react";
 import { AppRoute } from "../enums/AppRoute";
-import { useAuth } from "../providers/auth/useAuth";
+import { useAuth } from "../providers/auth/hooks/useAuth";
 import { useMutation } from "react-query";
 import { ApiRoute } from "../enums/ApiRoute";
 

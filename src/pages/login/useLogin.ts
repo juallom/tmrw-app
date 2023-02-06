@@ -4,7 +4,7 @@ import { useToast } from "@chakra-ui/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { LoginUser } from "../../providers/auth/types";
-import { useAuth } from "../../providers/auth/useAuth";
+import { useAuth } from "../../providers/auth/hooks/useAuth";
 import { ApiRoute } from "../../enums/ApiRoute";
 import { AppRoute } from "../../enums/AppRoute";
 
