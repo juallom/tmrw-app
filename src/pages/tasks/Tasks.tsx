@@ -27,7 +27,7 @@ export const Tasks: React.FC = () => {
       <PageLayout>
         <>
           <Flex mt={6} alignItems="center">
-            <Heading as="h1" size="2xl" flexGrow={1}>
+            <Heading as="h1" size="xl" flexGrow={1}>
               Tasks
             </Heading>
             <Button colorScheme="blue" size="md" onClick={onModalOpen}>

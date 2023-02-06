@@ -14,7 +14,7 @@ export const AuthContext = React.createContext<AuthContextType>(null!);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    Boolean(localStorage.getItem(STORAGE_AUTHENTICATED_KEY))
+    localStorage.getItem(STORAGE_AUTHENTICATED_KEY) === "true"
   );
   const [user, setUser] = useState<any>(
     JSON.parse(localStorage.getItem(STORAGE_AUTHENTICATED_USER) + "")

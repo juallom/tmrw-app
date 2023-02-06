@@ -4,6 +4,7 @@ import { ProtectedRoute } from "./providers/auth/components/ProtectedRoute";
 import { Login } from "./pages/login/Login";
 import { SignUp } from "./pages/signup/SignUp";
 import { Tasks } from "./pages/tasks/Tasks";
+import { System } from "./pages/system/System";
 import { AppRoute } from "./enums/AppRoute";
 
 function App() {
@@ -17,6 +18,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Tasks />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={AppRoute.SYSTEM_SETTINGS}
+          element={
+            <ProtectedRoute>
+              <System />
             </ProtectedRoute>
           }
         />
