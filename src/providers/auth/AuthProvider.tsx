@@ -15,18 +15,18 @@ export const AuthContext = React.createContext<AuthContextType>(null!);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    localStorage.getItem(STORAGE_AUTHENTICATED_KEY) === "true"
+    sessionStorage.getItem(STORAGE_AUTHENTICATED_KEY) === "true"
   );
   const [user, setUser] = useState<User | null>(
-    JSON.parse(localStorage.getItem(STORAGE_AUTHENTICATED_USER) + "")
+    JSON.parse(sessionStorage.getItem(STORAGE_AUTHENTICATED_USER) + "")
   );
 
   const login = useCallback(
     (user: User) => {
       setIsAuthenticated(true);
       setUser(user);
-      localStorage.setItem(STORAGE_AUTHENTICATED_KEY, "true");
-      localStorage.setItem(STORAGE_AUTHENTICATED_USER, JSON.stringify(user));
+      sessionStorage.setItem(STORAGE_AUTHENTICATED_KEY, "true");
+      sessionStorage.setItem(STORAGE_AUTHENTICATED_USER, JSON.stringify(user));
     },
     [setIsAuthenticated, setUser]
   );
@@ -34,8 +34,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = useCallback(() => {
     setIsAuthenticated(false);
     setUser(null);
-    localStorage.setItem(STORAGE_AUTHENTICATED_KEY, "false");
-    localStorage.setItem(STORAGE_AUTHENTICATED_USER, "null");
+    sessionStorage.setItem(STORAGE_AUTHENTICATED_KEY, "false");
+    sessionStorage.setItem(STORAGE_AUTHENTICATED_USER, "null");
   }, [setIsAuthenticated, setUser]);
 
   return (
