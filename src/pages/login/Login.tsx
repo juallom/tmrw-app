@@ -19,7 +19,7 @@ import {
 import { useLogin } from "./useLogin";
 
 export const Login = () => {
-  const { handleSubmit, onSubmit, errors, register } = useLogin();
+  const { handleSubmit, onSubmit, errors, register, isLoading } = useLogin();
   return (
     <>
       <Container maxW={"container.md"}>
@@ -75,7 +75,7 @@ export const Login = () => {
                   Sign up
                 </Button>
                 <Spacer />
-                <Button type="submit" colorScheme="blue">
+                <Button type="submit" colorScheme="blue" isLoading={isLoading}>
                   Login
                 </Button>
               </Flex>

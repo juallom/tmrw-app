@@ -3,27 +3,29 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { LoginUser } from "../../auth/types";
-import { useAuth } from "../../auth/useAuth";
+import { LoginUser } from "../../providers/auth/types";
+import { useAuth } from "../../providers/auth/useAuth";
+import { ApiRoute } from "../../enums/ApiRoute";
+import { AppRoute } from "../../enums/AppRoute";
 
 export const useLogin = () => {
   const toast = useToast();
   const location = useLocation();
   const navigate = useNavigate();
-  const { signin } = useAuth();
-  const from = location.state?.from?.pathname || "/dashboard";
+  const { login } = useAuth();
+  const from = location.state?.from?.pathname || AppRoute.DASHBOARD;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const mutation = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: (loginUser: LoginUser) => {
-      return axios.post("/api/auth/login", loginUser);
+      return axios.post(ApiRoute.LOGIN, loginUser);
     },
-    onSuccess: ({ data: { access_token } }) => {
-      signin(access_token);
+    onSuccess: ({ data: { User } }) => {
+      login(User);
       navigate(from, { replace: true });
     },
     onError: () => {
@@ -39,7 +41,7 @@ export const useLogin = () => {
   });
 
   const onSubmit = (data: FieldValues) => {
-    mutation.mutate(data as LoginUser);
+    mutate(data as LoginUser);
   };
 
   return {
@@ -47,5 +49,6 @@ export const useLogin = () => {
     handleSubmit,
     errors,
     onSubmit,
+    isLoading,
   };
 };

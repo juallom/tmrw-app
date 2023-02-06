@@ -1,22 +1,22 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-
-import { ProtectedRoute } from "./auth/ProtectedRoute";
+import { ProtectedRoute } from "./providers/auth/components/ProtectedRoute";
 import { Login } from "./pages/login/Login";
 import { SignUp } from "./pages/signup/SignUp";
-import { Dashboard } from "./pages/dashboard/Dashboard";
+import { Tasks } from "./pages/tasks/Tasks";
+import { AppRoute } from "./enums/AppRoute";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path={AppRoute.LOGIN} element={<Login />} />
+        <Route path={AppRoute.SIGNUP} element={<SignUp />} />
         <Route
-          path="/dashboard"
+          path={AppRoute.DASHBOARD}
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <Tasks />
             </ProtectedRoute>
           }
         />

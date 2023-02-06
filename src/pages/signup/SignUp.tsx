@@ -19,8 +19,14 @@ import {
 import { useSignUp } from "./useSignUp";
 
 export const SignUp: FC = () => {
-  const { handleSubmit, onSubmit, errors, register, validateConfirmPassword } =
-    useSignUp();
+  const {
+    handleSubmit,
+    onSubmit,
+    errors,
+    register,
+    validateConfirmPassword,
+    isLoading,
+  } = useSignUp();
 
   return (
     <>
@@ -75,6 +81,16 @@ export const SignUp: FC = () => {
                     type="password"
                     {...register("password", {
                       required: "Password is required",
+                      minLength: {
+                        value: 12,
+                        message: "Password must be at least 12 characters long",
+                      },
+                      pattern: {
+                        value:
+                          /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+                        message:
+                          "Password must include lowercase, uppercase, number and special characters",
+                      },
                     })}
                   />
                   <FormErrorMessage>
@@ -114,7 +130,7 @@ export const SignUp: FC = () => {
                   Back to login
                 </Button>
                 <Spacer />
-                <Button type="submit" colorScheme="blue">
+                <Button type="submit" colorScheme="blue" isLoading={isLoading}>
                   Sign up
                 </Button>
               </Flex>
