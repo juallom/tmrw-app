@@ -9,6 +9,9 @@ export type WaitingProps = {
 
 export const Waiting: React.FC<WaitingProps> = ({ tasks }) => {
   const { user } = useAuth();
+  if (!user) {
+    return null;
+  }
   return (
     <Box mt={6}>
       {tasks.map((task) => {

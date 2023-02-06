@@ -27,6 +27,9 @@ export const Notifications: React.FC<NotificationsProps> = ({
   deleteMutation,
 }) => {
   const { user } = useAuth();
+  if (!user) {
+    return null;
+  }
   return (
     <Box mt={6}>
       {tasks

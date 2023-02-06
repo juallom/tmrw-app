@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from "react";
+import {User} from "./types";
 
 type AuthContextType = {
   isAuthenticated: boolean;
-  user: any;
-  login: (user: any) => void;
+  user: User | null;
+  login: (user: User) => void;
   logout: VoidFunction;
 };
 
@@ -16,12 +17,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     localStorage.getItem(STORAGE_AUTHENTICATED_KEY) === "true"
   );
-  const [user, setUser] = useState<any>(
+  const [user, setUser] = useState<User | null>(
     JSON.parse(localStorage.getItem(STORAGE_AUTHENTICATED_USER) + "")
   );
 
   const login = useCallback(
-    (user: any) => {
+    (user: User) => {
       setIsAuthenticated(true);
       setUser(user);
       localStorage.setItem(STORAGE_AUTHENTICATED_KEY, "true");

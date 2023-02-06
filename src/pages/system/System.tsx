@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FocusEvent, useState } from "react";
 import { PageLayout } from "../../components/PageLayout";
 import {
   Alert,
@@ -19,19 +19,28 @@ import {
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 import { ApiRoute } from "../../enums/ApiRoute";
+import { User } from "../../providers/auth/types";
 
-const PriorityChange: React.FC<{ user: any }> = ({ user }) => {
+const PriorityChange: React.FC<{ user: User }> = ({ user }) => {
   const [priority, setPriority] = useState<number>(user.priority);
   const mutation = useMutation((priority: number) => {
     return axios.post(`${ApiRoute.USERS}/${user.id}`, { priority });
   });
-  const onChange = (event: any) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setPriority(event.target.value);
+    const n = parseInt(event.target.value);
+    if (!isNaN(n)) {
+      setPriority(n);
+    } else {
+      setPriority(user.priority);
+    }
   };
-  const onBlur = (event: any) => {
+  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
     event.preventDefault();
-    mutation.mutate(event.target.value);
+    const n = parseInt(event.target.value);
+    if (!isNaN(n)) {
+      mutation.mutate(n);
+    }
   };
   return (
     <Input type="number" value={priority} onBlur={onBlur} onChange={onChange} />
@@ -62,7 +71,8 @@ export const System = () => {
                 <AlertIcon />
                 <Flex>
                   <AlertDescription>
-                    Priority value. It ranges from 1 (highest priority) to 100 (lowest priority).
+                    Priority value. It ranges from 1 (highest priority) to 100
+                    (lowest priority).
                   </AlertDescription>
                 </Flex>
               </Alert>
@@ -77,7 +87,7 @@ export const System = () => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {data.data.map((user: any) => (
+                    {data.data.map((user: User) => (
                       <Tr key={user.id}>
                         <Td>{user.id}</Td>
                         <Td>{user.email}</Td>

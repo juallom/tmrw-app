@@ -28,7 +28,7 @@ export const Active: React.FC<ActiveProps> = ({ tasks }) => {
                 <Text>Created by: {task.data.createdByDisplay}</Text>
               </Flex>
             </Box>
-            <Progress hasStripe isIndeterminate />
+            <Progress value={task.progress} />
           </Box>
         );
       })}

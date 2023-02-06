@@ -23,7 +23,7 @@ export const Navigation: React.FC = () => {
     mutation.mutate();
   };
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated || !user) {
     return null;
   }
 
