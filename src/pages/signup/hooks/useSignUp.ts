@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { ApiRoute } from "../../enums/ApiRoute";
+import { ApiRoute } from "../../../enums/ApiRoute";
 
 export const useSignUp = () => {
   const navigate = useNavigate();

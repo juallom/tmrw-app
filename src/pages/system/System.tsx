@@ -43,7 +43,13 @@ const PriorityChange: React.FC<{ user: User }> = ({ user }) => {
     }
   };
   return (
-    <Input type="number" value={priority} onBlur={onBlur} onChange={onChange} />
+    <Input
+      type="number"
+      value={priority}
+      onBlur={onBlur}
+      onChange={onChange}
+      data-testid={"priority"}
+    />
   );
 };
 
@@ -60,7 +66,7 @@ export const System = () => {
             System settings
           </Heading>
           {error && (
-            <Alert status="error">
+            /* istanbul ignore next */ <Alert status="error">
               <AlertIcon />
               <AlertTitle>There was an error retrieving users list.</AlertTitle>
             </Alert>

@@ -23,7 +23,7 @@ export const Navigation: React.FC = () => {
     mutation.mutate();
   };
 
-  if (!isAuthenticated || !user) {
+  if (!isAuthenticated) {
     return null;
   }
 
@@ -34,6 +34,7 @@ export const Navigation: React.FC = () => {
         borderBottomColor={"gray.100"}
         borderBottomWidth={"2px"}
         mb={3}
+        role="navigation"
       >
         <Container maxW={"container.lg"}>
           <Flex>
@@ -41,7 +42,7 @@ export const Navigation: React.FC = () => {
               Dashboard
             </Link>
             <Spacer />
-            {user.role === "ROOT" && (
+            {user?.role === "ROOT" && (
               <Link as={RouterLink} to={AppRoute.SYSTEM_SETTINGS} mr={6}>
                 System settings
               </Link>

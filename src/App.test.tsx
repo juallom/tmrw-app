@@ -1,9 +1,10 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
 import App from "./App";
+import { renderWithProviders } from "./testUtils";
 
-test("renders learn react link", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("App", () => {
+  it("should render correctly", () => {
+    const { getByRole } = renderWithProviders(<App />);
+    expect(getByRole("heading", { name: "Login" })).toBeInTheDocument();
+  });
 });

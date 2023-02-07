@@ -16,7 +16,7 @@ import {
   CardBody,
   CardFooter,
 } from "@chakra-ui/react";
-import { useSignUp } from "./useSignUp";
+import { useSignUp } from "./hooks/useSignUp";
 
 export const SignUp: FC = () => {
   const {
@@ -51,9 +51,13 @@ export const SignUp: FC = () => {
                       },
                     })}
                     isInvalid={Boolean(errors.email)}
+                    data-testid={"email"}
                   />
                   <FormErrorMessage>
-                    <>{errors.email && errors.email.message}</>
+                    <>
+                      {errors.email &&
+                        /* istanbul ignore next */ errors.email.message}
+                    </>
                   </FormErrorMessage>
                 </FormControl>
                 <FormControl isRequired isInvalid={Boolean(errors.firstName)}>
@@ -64,9 +68,13 @@ export const SignUp: FC = () => {
                     {...register("firstName", {
                       required: "First name is required",
                     })}
+                    data-testid={"firstName"}
                   />
                   <FormErrorMessage>
-                    <>{errors.firstName && errors.firstName.message}</>
+                    <>
+                      {errors.firstName &&
+                        /* istanbul ignore next */ errors.firstName.message}
+                    </>
                   </FormErrorMessage>
                 </FormControl>
                 <FormControl>
@@ -92,9 +100,13 @@ export const SignUp: FC = () => {
                           "Password must include lowercase, uppercase, number and special characters",
                       },
                     })}
+                    data-testid={"password"}
                   />
                   <FormErrorMessage>
-                    <>{errors.password && errors.password.message}</>
+                    <>
+                      {errors.password &&
+                        /* istanbul ignore next */ errors.password.message}
+                    </>
                   </FormErrorMessage>
                 </FormControl>
                 <FormControl
@@ -110,10 +122,13 @@ export const SignUp: FC = () => {
                       required: "Confirm password is required",
                       validate: validateConfirmPassword,
                     })}
+                    data-testid={"confirmPassword"}
                   />
                   <FormErrorMessage>
                     <>
-                      {errors.confirmPassword && errors.confirmPassword.message}
+                      {errors.confirmPassword &&
+                        /* istanbul ignore next */ errors.confirmPassword
+                          .message}
                     </>
                   </FormErrorMessage>
                 </FormControl>

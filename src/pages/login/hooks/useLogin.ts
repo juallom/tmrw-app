@@ -3,10 +3,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { LoginUser } from "../../providers/auth/types";
-import { useAuth } from "../../providers/auth/hooks/useAuth";
-import { ApiRoute } from "../../enums/ApiRoute";
-import { AppRoute } from "../../enums/AppRoute";
+import { LoginUser } from "../../../providers/auth/types";
+import { useAuth } from "../../../providers/auth/hooks/useAuth";
+import { ApiRoute } from "../../../enums/ApiRoute";
+import { AppRoute } from "../../../enums/AppRoute";
 
 export const useLogin = () => {
   const toast = useToast();
@@ -32,7 +32,7 @@ export const useLogin = () => {
       toast({
         position: "top-right",
         title: "Server error.",
-        description: "Account failed to be created.",
+        description: "Login failed, please try again later.",
         status: "error",
         duration: 9000,
         isClosable: true,

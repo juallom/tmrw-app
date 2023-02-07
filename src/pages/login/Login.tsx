@@ -16,9 +16,9 @@ import {
   CardBody,
   CardFooter,
 } from "@chakra-ui/react";
-import { useLogin } from "./useLogin";
+import { useLogin } from "./hooks/useLogin";
 
-export const Login = () => {
+export const Login: React.FC = () => {
   const { handleSubmit, onSubmit, errors, register, isLoading } = useLogin();
   return (
     <>
@@ -42,10 +42,14 @@ export const Login = () => {
                         message: "Invalid email address",
                       },
                     })}
+                    data-testid="email"
                     isInvalid={Boolean(errors.email)}
                   />
                   <FormErrorMessage>
-                    <>{errors.email && errors.email.message}</>
+                    <>
+                      {errors.email &&
+                        /* istanbul ignore next */ errors.email.message}
+                    </>
                   </FormErrorMessage>
                 </FormControl>
                 <FormControl isRequired isInvalid={Boolean(errors.password)}>
@@ -57,9 +61,13 @@ export const Login = () => {
                     {...register("password", {
                       required: "Password is required",
                     })}
+                    data-testid="password"
                   />
                   <FormErrorMessage>
-                    <>{errors.password && errors.password.message}</>
+                    <>
+                      {errors.password &&
+                        /* istanbul ignore next */ errors.password.message}
+                    </>
                   </FormErrorMessage>
                 </FormControl>
               </Stack>

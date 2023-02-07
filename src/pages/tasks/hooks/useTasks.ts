@@ -8,7 +8,6 @@ export type UseTasksReturn = {
   waiting: Task[];
 };
 
-
 export const useTasks = (): UseTasksReturn => {
   const [completed, setCompleted] = useState<Task[]>([]);
   const [active, setActive] = useState<Task[]>([]);
@@ -17,12 +16,18 @@ export const useTasks = (): UseTasksReturn => {
   useEffect(() => {
     const socket = io("/");
 
-    socket.on("tasks", (data) => {
+    socket.on("completedTasks", (data) => {
       setCompleted(data.completed);
+    });
+
+    socket.on("activeTasks", (data) => {
       setActive(data.active);
+    });
+
+    socket.on("waitingTasks", (data) => {
       setWaiting(data.waiting);
     });
-  }, [])
+  }, []);
 
   return {
     completed,
